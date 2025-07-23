@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>تقویم رویدادها</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- فونت ایران‌سانس یا وزیر (دلخواه) -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet" type="text/css"/>
+
+    <style>
+        body {
+            font-family: 'Vazir', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #0c4a6e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+        }
+
+        td {
+            background-color: #f1f5f9;
+        }
+
+        td:hover {
+            background-color: #dbeafe;
+            cursor: pointer;
+        }
+
+        .events-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .events-list li {
+            background-color: #ecfeff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border-right: 4px solid #0ea5e9;
+        }
+
+        .no-events {
+            text-align: center;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            table, th, td {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+
+
+        .today {
+            background-color: #fde68a !important; /* زرد روشن */
+            border: 2px solid #f59e0b;
+            font-weight: bold;
+            color: #000;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📅 تقویم رویدادهای ماه</h1>
+
+    <div>
+        {{ calendar|safe }}
+    </div>
+
+    <h2>📌 رویدادهای این ماه:</h2>
+    {% if events %}
+    <ul class="events-list">
+        {% for event in events %}
+        <li>
+            <strong>{{ event.jalali }}</strong> ({{ event.miladi }}) - {{ event.title }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="no-events">هیچ رویدادی ثبت نشده است.</p>
+    {% endif %}
+</div>
+</body>
+</html>
